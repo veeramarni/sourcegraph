@@ -6,6 +6,7 @@ import { mutateSettings, updateSettings } from '../../../../shared/src/settings/
 import { EMPTY_SETTINGS_CASCADE, gqlToCascade } from '../../../../shared/src/settings/settings'
 import { LocalStorageSubject } from '../../../../shared/src/util/LocalStorageSubject'
 import { toPrettyBlobURL } from '../../../../shared/src/util/url'
+import { ExtensionStorageSubject } from '../browser/ExtensionStorageSubject'
 import * as runtime from '../browser/runtime'
 import storage from '../browser/storage'
 import { CodeHost } from '../libs/code_intelligence'
@@ -119,6 +120,7 @@ export function createPlatformContext({ urlToFile }: Pick<CodeHost, 'urlToFile'>
         sourcegraphURL: sourcegraphUrl,
         clientApplication: 'other',
         traceExtensionHostCommunication: new LocalStorageSubject<boolean>('traceExtensionHostCommunication', false),
+        unpackedExtensionURL: new ExtensionStorageSubject('unpackedExtensionURL', ''),
     }
     return context
 }
